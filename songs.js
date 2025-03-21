@@ -18,7 +18,7 @@ const songs = [
     { city: "Lith Harbor", file: "Music TOZ/[MapleStory BGM] Lith Harbor_ Above the Treetops.mp3", image: "images/lithharbor.jpg" },
     { city: "Ludibrium", file: "Music TOZ/[MapleStory BGM] Ludibrium_ Fantastic Thinking.mp3", image: "images/ludibrium.jpg" },
     { city: "Magatia", file: "Music TOZ/[MapleStory BGM] Magatia_ Dispute.mp3", image: "images/magatia.jpg" },
-    { city: "Kuala Lumpur", file: "Music TOZ/[MapleStory BGM] Malaysia_ Kuala Lumpur Kampung Village.mp3", image: "images/kampungvillage.jpg" },
+    { city: "Kampung Village", file: "Music TOZ/[MapleStory BGM] Malaysia_ Kuala Lumpur Kampung Village.mp3", image: "images/kampungvillage.jpg" },
     { city: "Mu Lung", file: "Music TOZ/[MapleStory BGM] Mu Lung Hill.mp3", image: "images/mulung.jpg" },
     { city: "Mushroom Shrine", file: "Music TOZ/[MapleStory BGM] Mushroom Shrine_ Feeling.mp3", image: "images/mushroomshrine.jpg" },
     { city: "Nautilus", file: "Music TOZ/[MapleStory BGM] Nautilus.mp3", image: "images/nautilus.jpg" },
@@ -26,16 +26,44 @@ const songs = [
     { city: "Omega Sector", file: "Music TOZ/[MapleStory BGM] Omega Sector_ Let's March.mp3", image: "images/omegasector.jpg" },
     { city: "Orbis", file: "Music TOZ/[MapleStory BGM] Orbis_ Shinin' Harbor.mp3", image: "images/orbis.jpg" },
     { city: "Perion", file: "Music TOZ/[MapleStory BGM] Perion_ Nightmare.mp3", image: "images/perion.jpg" },
-    { city: "Rien Village", file: "Music TOZ/[MapleStory BGM] Rien Village.mp3", image: "images/rien.jpg" },
+    { city: "Rien", file: "Music TOZ/[MapleStory BGM] Rien Village.mp3", image: "images/rien.jpg" },
     { city: "Showa", file: "Music TOZ/[MapleStory BGM] Showa_ Yume.mp3", image: "images/showa.jpg" },
     { city: "BoatQuayTown", file: "Music TOZ/[MapleStory BGM] Singapore_ Boat Quay Town.mp3", image: "images/boatquaytown.jpg" },
+    { city: "BoatQuayTown", file: "Music TOZ/[MapleStory BGM] Singapore_ CBD Town.mp3", image: "images/cbd.jpg" },
     { city: "Sleepywood", file: "Music TOZ/[MapleStory BGM] Sleepywood.mp3", image: "images/sleepywood.jpg" }
 ];
+
+// Array of background images
+const backgrounds = ["bg1.png", "bg2.png", "bg3.png", "bg4.png"];
 
 const cityName = document.getElementById("cityName");
 const cityImage = document.getElementById("cityImage");
 const audioPlayer = document.getElementById("audioPlayer");
 const imagePalette = document.getElementById("imagePalette");
+const playPauseBtn = document.getElementById("playPauseBtn");
+const volumeSlider = document.getElementById("volumeSlider");
+const backgroundContainer = document.getElementById("backgroundContainer");
+
+// Preload all audio files
+function preloadAudio() {
+    songs.forEach(song => {
+        const audio = new Audio(song.file);
+        audio.preload = "auto"; // Preload the audio file
+    });
+}
+
+// Function to get a random background
+function getRandomBackground() {
+    const randomIndex = Math.floor(Math.random() * backgrounds.length);
+    return `images/${backgrounds[randomIndex]}`;
+}
+
+// Function to set a specific background
+function setBackground(image) {
+    const bgPath = `url('${image}')`;
+    console.log("Setting background:", bgPath); // Debugging
+    backgroundContainer.style.backgroundImage = bgPath;
+}
 
 function loadPalette() {
     songs.forEach(song => {
@@ -54,6 +82,34 @@ function playSong(song) {
     audioPlayer.src = song.file;
     audioPlayer.style.display = "block";
     audioPlayer.play();
+    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    setBackground(song.image); // Update background to town-specific image
 }
 
+// Play/Pause Button
+playPauseBtn.addEventListener("click", () => {
+    if (audioPlayer.paused) {
+        audioPlayer.play();
+        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    } else {
+        audioPlayer.pause();
+        playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+    }
+});
+
+// Volume Slider
+volumeSlider.addEventListener("input", () => {
+    audioPlayer.volume = volumeSlider.value;
+});
+
+// Update button icon when song ends
+audioPlayer.addEventListener("ended", () => {
+    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+});
+
+// Set initial background to a random image
+setBackground(getRandomBackground());
+
+// Preload audio files when the page loads
+preloadAudio();
 loadPalette();
