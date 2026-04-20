@@ -93,7 +93,8 @@
                         "nav",
                         { className: "nav-links", "aria-label": "Main navigation" },
                         h("a", { href: "index.html", className: "active" }, "Songs"),
-                        h("a", { href: "practice.html" }, "Practice")
+                        h("a", { href: "practice.html" }, "Practice"),
+                        h("a", { href: "gamemaster.html" }, "Game Master")
                     )
                 )
             ),
