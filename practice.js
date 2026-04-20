@@ -1,107 +1,179 @@
-const songs = [
-    { city: "Temple of Time", file: "Music TOZ/[MapleStory BGM] Temple of Time.mp3", image: "images/templeoftime.jpg" },
-    { city: "Amoria", file: "Music TOZ/[MapleStory BGM] Amoria.mp3", image: "images/amoria.jpg" },
-    { city: "Aquarium", file: "Music TOZ/[MapleStory BGM] Aquarium.mp3", image: "images/aquarium.jpg" },
-    { city: "Ariant", file: "Music TOZ/[MapleStory BGM] Ariant.mp3", image: "images/ariant.jpg" },
-    { city: "Shanghai", file: "Music TOZ/[MapleStory BGM] China_ Go Shanghai (Original Version).mp3", image: "images/shanghai.jpg" },
-    { city: "El Nath", file: "Music TOZ/[MapleStory BGM] El Nath_ Snowy Village.mp3", image: "images/elnath.jpg" },
-    { city: "Ellin Forest", file: "Music TOZ/[MapleStory BGM] Ellin Forest.mp3", image: "images/ellinforest.jpg" },
-    { city: "Ellinia", file: "Music TOZ/[MapleStory BGM] Ellinia_ When the Morning Comes.mp3", image: "images/ellinia.jpg" },
-    { city: "Ereve", file: "Music TOZ/[MapleStory BGM] Ereve_ Queen's Garden.mp3", image: "images/ereve.jpg" },
-    { city: "Florina Beach", file: "Music TOZ/[MapleStory BGM] Florina Beach_ Beachway.mp3", image: "images/florinabeach.jpg" },
-    { city: "Golden Temple", file: "Music TOZ/[MapleStory BGM] Golden Temple Town.mp3", image: "images/goldentemple.jpg" },
-    { city: "Henesys", file: "Music TOZ/[MapleStory BGM] Henesys_ Floral Life.mp3", image: "images/henesys.jpg" },
-    { city: "Herb Town", file: "Music TOZ/[MapleStory BGM] Herb Town_ White Herb.mp3", image: "images/herbtown.jpg" },
-    { city: "Kerning City", file: "Music TOZ/[MapleStory BGM] Kerning City_ Bad Guys.mp3", image: "images/kerningcity.jpg" },
-    { city: "Korean Folk Town", file: "Music TOZ/[MapleStory BGM] Korean Folk Town_ Downtown.mp3", image: "images/koreanfolktown.jpg" },
-    { city: "Leafre", file: "Music TOZ/[MapleStory BGM] Leafre.mp3", image: "images/leafre.jpg" },
-    { city: "Lith Harbor", file: "Music TOZ/[MapleStory BGM] Lith Harbor_ Above the Treetops.mp3", image: "images/lithharbor.jpg" },
-    { city: "Ludibrium", file: "Music TOZ/[MapleStory BGM] Ludibrium_ Fantastic Thinking.mp3", image: "images/ludibrium.jpg" },
-    { city: "Magatia", file: "Music TOZ/[MapleStory BGM] Magatia_ Dispute.mp3", image: "images/magatia.jpg" },
-    { city: "Kampung Village", file: "Music TOZ/[MapleStory BGM] Malaysia_ Kuala Lumpur Kampung Village.mp3", image: "images/kampungvillage.jpg" },
-    { city: "Mu Lung", file: "Music TOZ/[MapleStory BGM] Mu Lung Hill.mp3", image: "images/mulung.jpg" },
-    { city: "Mushroom Shrine", file: "Music TOZ/[MapleStory BGM] Mushroom Shrine_ Feeling.mp3", image: "images/mushroomshrine.jpg" },
-    { city: "Nautilus", file: "Music TOZ/[MapleStory BGM] Nautilus.mp3", image: "images/nautilus.jpg" },
-    { city: "New Leaf City", file: "Music TOZ/[MapleStory BGM] New Leaf City_ Town.mp3", image: "images/newleafcity.jpg" },
-    { city: "Omega Sector", file: "Music TOZ/[MapleStory BGM] Omega Sector_ Let's March.mp3", image: "images/omegasector.jpg" },
-    { city: "Orbis", file: "Music TOZ/[MapleStory BGM] Orbis_ Shinin' Harbor.mp3", image: "images/orbis.jpg" },
-    { city: "Perion", file: "Music TOZ/[MapleStory BGM] Perion_ Nightmare.mp3", image: "images/perion.jpg" },
-    { city: "Rien", file: "Music TOZ/[MapleStory BGM] Rien Village.mp3", image: "images/rien.jpg" },
-    { city: "Showa", file: "Music TOZ/[MapleStory BGM] Showa_ Yume.mp3", image: "images/showa.jpg" },
-    { city: "BoatQuayTown", file: "Music TOZ/[MapleStory BGM] Singapore_ Boat Quay Town.mp3", image: "images/boatquaytown.jpg" },
-    { city: "BoatQuayTown", file: "Music TOZ/[MapleStory BGM] Singapore_ CBD Town.mp3", image: "images/cbd.jpg" },
-    { city: "Sleepywood", file: "Music TOZ/[MapleStory BGM] Sleepywood.mp3", image: "images/sleepywood.jpg" }
-];
+const roundLimit = 10;
+const practiceSongs = window.songs || [];
 
 let score = 0;
-let rounds = 0;
+let round = 0;
+let mode = null;
 let currentSong = null;
+let remainingSongs = [];
+let isAnswerLocked = false;
+let nextRoundTimer = null;
 
-document.getElementById("startBtn").addEventListener("click", startGame);
-document.getElementById("restartBtn").addEventListener("click", startGame); // Add restart button listener
+const setupPanel = document.getElementById("setupPanel");
+const gameContainer = document.getElementById("gameContainer");
+const finalPanel = document.getElementById("finalPanel");
+const roundDisplay = document.getElementById("roundDisplay");
+const scoreDisplay = document.getElementById("scoreDisplay");
+const modeDisplay = document.getElementById("modeDisplay");
+const audioPlayer = document.getElementById("audioPlayer");
+const options = document.getElementById("options");
+const typedAnswerForm = document.getElementById("typedAnswerForm");
+const typedAnswer = document.getElementById("typedAnswer");
+const feedback = document.getElementById("feedback");
+const finalMessage = document.getElementById("finalMessage");
+const restartBtn = document.getElementById("restartBtn");
 
-function startGame() {
+document.getElementById("hintModeBtn").addEventListener("click", () => startGame("hints"));
+document.getElementById("noHintModeBtn").addEventListener("click", () => startGame("no-hints"));
+document.getElementById("playAgainBtn").addEventListener("click", () => showSetup());
+restartBtn.addEventListener("click", () => showSetup());
+typedAnswerForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    checkAnswer(typedAnswer.value);
+});
+
+function showSetup() {
+    clearTimeout(nextRoundTimer);
+    audioPlayer.pause();
+    audioPlayer.removeAttribute("src");
+    audioPlayer.load();
+
+    setupPanel.style.display = "block";
+    gameContainer.style.display = "none";
+    finalPanel.style.display = "none";
+    restartBtn.style.display = "none";
+    feedback.style.display = "none";
+    options.innerHTML = "";
+    typedAnswer.value = "";
+}
+
+function startGame(selectedMode) {
+    mode = selectedMode;
     score = 0;
-    rounds = 0;
-    document.getElementById("startBtn").style.display = "none";
-    document.getElementById("gameContainer").style.display = "block";
-    document.getElementById("finalMessage").style.display = "none";
-    document.getElementById("finalMessage2").style.display = "none";
-    document.getElementById("restartBtn").style.display = "block"; // Show restart button
-    document.getElementById("roundDisplay").textContent = `Round: ${rounds + 1}/10`;
+    round = 0;
+    isAnswerLocked = false;
+    remainingSongs = shuffle([...practiceSongs]);
+
+    setupPanel.style.display = "none";
+    gameContainer.style.display = "block";
+    finalPanel.style.display = "none";
+    restartBtn.style.display = "inline-flex";
+    modeDisplay.textContent = mode === "hints" ? "Hints: 3 choices" : "No hints: type the town";
+    scoreDisplay.textContent = `Score: ${score}/${roundLimit}`;
+
     nextRound();
 }
 
 function nextRound() {
-    if (rounds >= 10) {
-        document.getElementById("gameContainer").style.display = "none";
-        document.getElementById("restartBtn").style.display = "none"; // Hide restart button at the end
-        if (score === 10) {
-            document.getElementById("finalMessage").style.display = "block"; // Show congrats message only if score is 10
-        } else {
-            document.getElementById("finalMessage2").textContent = `You scored ${score}/10 🎉`;
-            document.getElementById("finalMessage2").style.display = "block";
-        }
+    clearTimeout(nextRoundTimer);
+    isAnswerLocked = false;
+    feedback.style.display = "none";
+    feedback.textContent = "";
+    typedAnswer.value = "";
+    options.innerHTML = "";
+
+    if (round >= roundLimit || remainingSongs.length === 0) {
+        endGame();
         return;
     }
-    rounds++;
-    document.getElementById("roundDisplay").textContent = `Round: ${rounds}/10`;
-    document.getElementById("feedback").style.display = "none";
-    const songPool = [...songs];
-    currentSong = songPool.splice(Math.floor(Math.random() * songPool.length), 1)[0];
-    document.getElementById("audioPlayer").src = currentSong.file;
-    document.getElementById("audioPlayer").play();
-    
-    const options = shuffle([currentSong, ...songPool.slice(0, 2)]);
-    document.getElementById("options").innerHTML = "";
-    options.forEach(song => {
-        const btn = document.createElement("button");
-        btn.textContent = song.city;
-        btn.className = "option-btn";
-        btn.onclick = () => checkAnswer(song.city);
-        document.getElementById("options").appendChild(btn);
+
+    round += 1;
+    currentSong = remainingSongs.pop();
+    roundDisplay.textContent = `Round: ${round}/${roundLimit}`;
+
+    audioPlayer.src = currentSong.file;
+    audioPlayer.currentTime = 0;
+    audioPlayer.play().catch(() => {
+        feedback.textContent = "Press play to hear the song.";
+        feedback.className = "feedback neutral";
+        feedback.style.display = "block";
     });
-    disableOptions(false);
-}
 
-function checkAnswer(selectedCity) {
-    disableOptions(true);
-    const feedbackDiv = document.getElementById("feedback");
-    if (selectedCity === currentSong.city) {
-        score++;
-        feedbackDiv.textContent = "👍";
+    if (mode === "hints") {
+        renderMultipleChoice();
+        typedAnswerForm.style.display = "none";
     } else {
-        feedbackDiv.textContent = "❌";
+        typedAnswerForm.style.display = "flex";
     }
-    feedbackDiv.style.display = "block";
-    document.getElementById("scoreDisplay").textContent = `Score: ${score}/10`;
-    setTimeout(nextRound, 2000);
+
+    setAnswerControlsDisabled(false);
 }
 
-function shuffle(array) {
-    return array.sort(() => Math.random() - 0.5);
+function renderMultipleChoice() {
+    const wrongAnswers = shuffle(practiceSongs.filter((song) => song.city !== currentSong.city)).slice(0, 2);
+    const choices = shuffle([currentSong, ...wrongAnswers]);
+
+    typedAnswerForm.style.display = "none";
+    choices.forEach((song) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "option-btn";
+        button.textContent = song.city;
+        button.addEventListener("click", () => checkAnswer(song.city));
+        options.appendChild(button);
+    });
 }
 
-function disableOptions(disable) {
-    document.querySelectorAll(".option-btn").forEach(btn => btn.disabled = disable);
+function checkAnswer(answer) {
+    if (isAnswerLocked || !currentSong) return;
+
+    const isCorrect = normalizeAnswer(answer) === normalizeAnswer(currentSong.city);
+    isAnswerLocked = true;
+    setAnswerControlsDisabled(true);
+
+    if (isCorrect) {
+        score += 1;
+        feedback.textContent = `Correct: ${currentSong.city}`;
+        feedback.className = "feedback correct";
+    } else {
+        feedback.textContent = `Wrong. It was ${currentSong.city}.`;
+        feedback.className = "feedback wrong";
+    }
+
+    feedback.style.display = "block";
+    scoreDisplay.textContent = `Score: ${score}/${roundLimit}`;
+    nextRoundTimer = setTimeout(nextRound, 1800);
 }
+
+function endGame() {
+    audioPlayer.pause();
+    gameContainer.style.display = "none";
+    finalPanel.style.display = "block";
+    restartBtn.style.display = "inline-flex";
+
+    if (score === roundLimit) {
+        finalMessage.textContent = "Perfect score. You got every song right.";
+    } else {
+        finalMessage.textContent = `You scored ${score}/${roundLimit}.`;
+    }
+}
+
+function setAnswerControlsDisabled(disabled) {
+    document.querySelectorAll(".option-btn").forEach((button) => {
+        button.disabled = disabled;
+    });
+    typedAnswer.disabled = disabled;
+    typedAnswerForm.querySelector("button").disabled = disabled;
+
+    if (!disabled && mode === "no-hints") {
+        typedAnswer.focus();
+    }
+}
+
+function normalizeAnswer(value) {
+    return String(value)
+        .trim()
+        .toLowerCase()
+        .replace(/\s+/g, " ");
+}
+
+function shuffle(items) {
+    const copy = [...items];
+    for (let index = copy.length - 1; index > 0; index -= 1) {
+        const randomIndex = Math.floor(Math.random() * (index + 1));
+        [copy[index], copy[randomIndex]] = [copy[randomIndex], copy[index]];
+    }
+    return copy;
+}
+
+showSetup();

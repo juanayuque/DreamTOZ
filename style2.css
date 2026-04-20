@@ -1,44 +1,194 @@
 body {
-    text-align: center;
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fa;
-    display: flex;
-    flex-direction: column;
+    display: block;
+    min-height: 100vh;
+    color: #172019;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #ffffff;
+}
+
+#backgroundContainer {
+    display: none;
+}
+
+#backgroundContainer::after {
+    display: none;
+}
+
+.practice-shell {
+    width: min(760px, calc(100% - 32px));
+    margin: 44px auto;
+}
+
+.practice-panel {
+    padding: 24px;
+    background: #ffffff;
+    border: 1px solid #d9e2d6;
+    border-radius: 8px;
+    box-shadow: 0 12px 28px rgba(33, 45, 35, 0.12);
+}
+
+.practice-panel h1 {
+    margin: 0;
+}
+
+.setup-copy {
+    margin: 12px 0 22px;
+    color: #506050;
+    font-weight: 700;
+}
+
+.mode-actions,
+.typed-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.mode-actions button,
+.restart-btn,
+.typed-row button,
+.option-btn {
+    min-height: 46px;
+    padding: 0 16px;
+    color: #ffffff;
+    background: #2f6f4e;
+    border: 0;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 900;
+}
+
+.restart-btn {
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    gap: 8px;
+    min-width: 116px;
+    min-height: 42px;
+    padding: 0 14px;
+    color: #2f6f4e;
+    background: #ffffff;
+    border: 2px solid #2f6f4e;
 }
-.game-container {
+
+.mode-actions button:last-child {
+    background: #386a86;
+}
+
+.game-container,
+.final-panel {
     display: none;
-    margin-top: 20px;
 }
+
+.game-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 18px;
+}
+
+.mode-label {
+    margin: 0 0 4px;
+    color: #2f6f4e;
+    font-weight: 900;
+}
+
+#audioPlayer {
+    width: 100%;
+}
+
+.options {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 18px;
+}
+
 .option-btn {
-    display: block;
-    margin: 10px auto;
-    padding: 10px 20px;
-    font-size: 18px;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: white;
-    transition: background-color 0.3s;
+    color: #172019;
+    background: #ffffff;
+    border: 2px solid transparent;
+    text-align: left;
 }
+
 .option-btn:hover {
-    background-color: #0056b3;
+    border-color: #2f6f4e;
 }
-.option-btn:disabled {
-    background-color: #6c757d;
+
+.option-btn:disabled,
+.typed-row button:disabled {
     cursor: not-allowed;
+    opacity: 0.65;
 }
-#feedback {
+
+.typed-answer {
     display: none;
-    margin-top: 20px;
-    font-size: 24px;
+    gap: 8px;
+    margin-top: 18px;
 }
-#finalMessage {
+
+.typed-answer label {
+    color: #435143;
+    font-weight: 900;
+    text-align: left;
+}
+
+.typed-row input {
+    min-height: 46px;
+    width: 100%;
+    padding: 0 12px;
+    color: #172019;
+    background: #ffffff;
+    border: 2px solid #d9e2d6;
+    border-radius: 8px;
+    font-weight: 800;
+}
+
+.feedback {
     display: none;
-    font-size: 24px;
-    font-weight: bold;
-    margin-top: 20px;
+    margin-top: 18px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-weight: 900;
+}
+
+.feedback.correct {
+    color: #153c25;
+    background: #d8f1df;
+}
+
+.feedback.wrong {
+    color: #5a1616;
+    background: #f5d5d5;
+}
+
+.feedback.neutral {
+    color: #2f3f54;
+    background: #dce8f3;
+}
+
+.score-display {
+    margin: 18px 0 0;
+    color: #435143;
+    font-size: 1.1rem;
+    font-weight: 900;
+}
+
+@media (max-width: 560px) {
+    .practice-shell {
+        width: min(100% - 20px, 760px);
+        margin-top: 24px;
+    }
+
+    .mode-actions,
+    .typed-row,
+    .options {
+        grid-template-columns: 1fr;
+    }
+
+    .game-header {
+        align-items: stretch;
+        flex-direction: column;
+    }
 }

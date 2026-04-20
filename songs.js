@@ -1,168 +1,206 @@
 const songs = [
-    { city: "Temple of Time", region: "Ossyria", file: "Music TOZ/[MapleStory BGM] Temple of Time.mp3", image: "images/templeoftime.jpg" },
-    { city: "Amoria", region: "Victoria", file: "Music TOZ/[MapleStory BGM] Amoria.mp3", image: "images/amoria.jpg" },
-    { city: "Aquarium", region: "Ossyria", file: "Music TOZ/[MapleStory BGM] Aquarium.mp3", image: "images/aquarium.jpg" },
-    { city: "Ariant", region: "Ossyria", file: "Music TOZ/[MapleStory BGM] Ariant.mp3", image: "images/ariant.jpg" },
-    { city: "Shanghai", region: "World Tour", file: "Music TOZ/[MapleStory BGM] China_ Go Shanghai (Original Version).mp3", image: "images/shanghai.jpg" },
-    { city: "El Nath", region: "Ossyria", file: "Music TOZ/[MapleStory BGM] El Nath_ Snowy Village.mp3", image: "images/elnath.jpg" },
-    { city: "Ellin Forest", region: "Ossyria", file: "Music TOZ/[MapleStory BGM] Ellin Forest.mp3", image: "images/ellinforest.jpg" },
-    { city: "Ellinia", region: "Victoria", file: "Music TOZ/[MapleStory BGM] Ellinia_ When the Morning Comes.mp3", image: "images/ellinia.jpg" },
-    { city: "Ereve", region: "Ossyria", file: "Music TOZ/[MapleStory BGM] Ereve_ Queen's Garden.mp3", image: "images/ereve.jpg" },
-    { city: "Florina Beach", region: "Victoria", file: "Music TOZ/[MapleStory BGM] Florina Beach_ Beachway.mp3", image: "images/florinabeach.jpg" },
-    { city: "Golden Temple", region: "World Tour", file: "Music TOZ/[MapleStory BGM] Golden Temple Town.mp3", image: "images/goldentemple.jpg" },
-    { city: "Henesys", region: "Victoria", file: "Music TOZ/[MapleStory BGM] Henesys_ Floral Life.mp3", image: "images/henesys.jpg" },
-    { city: "Herb Town", region: "Ossyria", file: "Music TOZ/[MapleStory BGM] Herb Town_ White Herb.mp3", image: "images/herbtown.jpg" },
-    { city: "Kerning City", region: "Victoria", file: "Music TOZ/[MapleStory BGM] Kerning City_ Bad Guys.mp3", image: "images/kerningcity.jpg" },
-    { city: "Korean Folk Town", region: "Ossyria", file: "Music TOZ/[MapleStory BGM] Korean Folk Town_ Downtown.mp3", image: "images/koreanfolktown.jpg" },
-    { city: "Leafre", region: "Ossyria", file: "Music TOZ/[MapleStory BGM] Leafre.mp3", image: "images/leafre.jpg" },
-    { city: "Lith Harbor", region: "Victoria", file: "Music TOZ/[MapleStory BGM] Lith Harbor_ Above the Treetops.mp3", image: "images/lithharbor.jpg" },
-    { city: "Ludibrium", region: "Ossyria", file: "Music TOZ/[MapleStory BGM] Ludibrium_ Fantastic Thinking.mp3", image: "images/ludibrium.jpg" },
-    { city: "Magatia", region: "Ossyria", file: "Music TOZ/[MapleStory BGM] Magatia_ Dispute.mp3", image: "images/magatia.jpg" },
-    { city: "Kampung Village", region: "World Tour", file: "Music TOZ/[MapleStory BGM] Malaysia_ Kuala Lumpur Kampung Village.mp3", image: "images/kampungvillage.jpg" },
-    { city: "Mu Lung", region: "Ossyria", file: "Music TOZ/[MapleStory BGM] Mu Lung Hill.mp3", image: "images/mulung.jpg" },
-    { city: "Mushroom Shrine", region: "World Tour", file: "Music TOZ/[MapleStory BGM] Mushroom Shrine_ Feeling.mp3", image: "images/mushroomshrine.jpg" },
-    { city: "Nautilus", region: "Victoria", file: "Music TOZ/[MapleStory BGM] Nautilus.mp3", image: "images/nautilus.jpg" },
-    { city: "New Leaf City", region: "Victoria", file: "Music TOZ/[MapleStory BGM] New Leaf City_ Town.mp3", image: "images/newleafcity.jpg" },
-    { city: "Omega Sector", region: "Ossyria", file: "Music TOZ/[MapleStory BGM] Omega Sector_ Let's March.mp3", image: "images/omegasector.jpg" },
-    { city: "Orbis", region: "Ossyria", file: "Music TOZ/[MapleStory BGM] Orbis_ Shinin' Harbor.mp3", image: "images/orbis.jpg" },
-    { city: "Perion", region: "Victoria", file: "Music TOZ/[MapleStory BGM] Perion_ Nightmare.mp3", image: "images/perion.jpg" },
-    { city: "Rien", region: "Victoria", file: "Music TOZ/[MapleStory BGM] Rien Village.mp3", image: "images/rien.jpg" },
-    { city: "Showa", region: "World Tour", file: "Music TOZ/[MapleStory BGM] Showa_ Yume.mp3", image: "images/showa.jpg" },
-    { city: "BoatQuayTown", region: "World Tour", file: "Music TOZ/[MapleStory BGM] Singapore_ Boat Quay Town.mp3", image: "images/boatquaytown.jpg" },
-    { city: "CBD", region: "World Tour", file: "Music TOZ/[MapleStory BGM] Singapore_ CBD Town.mp3", image: "images/cbd.jpg" },
-    { city: "Sleepywood", region: "Victoria", file: "Music TOZ/[MapleStory BGM] Sleepywood.mp3", image: "images/sleepywood.jpg" }
+    {
+        region: "Victoria Island",
+        city: "Lith Harbor",
+        file: "Music TOZ/[MapleStory BGM] Lith Harbor_ Above the Treetops.mp3",
+        image: "images/lithharbor.jpg"
+    },
+    {
+        region: "Victoria Island",
+        city: "Henesys",
+        file: "Music TOZ/[MapleStory BGM] Henesys_ Floral Life.mp3",
+        image: "images/henesys.jpg"
+    },
+    {
+        region: "Victoria Island",
+        city: "Kerning City",
+        file: "Music TOZ/[MapleStory BGM] Kerning City_ Bad Guys.mp3",
+        image: "images/kerningcity.jpg"
+    },
+    {
+        region: "Victoria Island",
+        city: "Perion",
+        file: "Music TOZ/[MapleStory BGM] Perion_ Nightmare.mp3",
+        image: "images/perion.jpg"
+    },
+    {
+        region: "Victoria Island",
+        city: "Ellinia",
+        file: "Music TOZ/[MapleStory BGM] Ellinia_ When the Morning Comes.mp3",
+        image: "images/ellinia.jpg"
+    },
+    {
+        region: "Victoria Island",
+        city: "Nautilus Harbor",
+        file: "Music TOZ/[MapleStory BGM] Nautilus.mp3",
+        image: "images/nautilus.jpg"
+    },
+    {
+        region: "Victoria Island",
+        city: "Rien",
+        file: "Music TOZ/[MapleStory BGM] Rien Village.mp3",
+        image: "images/rien.jpg"
+    },
+    {
+        region: "Victoria Island",
+        city: "Sleepywood",
+        file: "Music TOZ/[MapleStory BGM] Sleepywood.mp3",
+        image: "images/sleepywood.jpg"
+    },
+    {
+        region: "Victoria Island",
+        city: "Florina Beach",
+        file: "Music TOZ/[MapleStory BGM] Florina Beach_ Beachway.mp3",
+        image: "images/florinabeach.jpg"
+    },
+    {
+        region: "Victoria Island",
+        city: "Amoria",
+        file: "Music TOZ/[MapleStory BGM] Amoria.mp3",
+        image: "images/amoria.jpg"
+    },
+    {
+        region: "World Tour",
+        city: "New Leaf City",
+        file: "Music TOZ/[MapleStory BGM] New Leaf City_ Town.mp3",
+        image: "images/newleafcity.jpg"
+    },
+    {
+        region: "World Tour",
+        city: "CBD",
+        file: "Music TOZ/[MapleStory BGM] Singapore_ CBD Town.mp3",
+        image: "images/cbd.jpg"
+    },
+    {
+        region: "World Tour",
+        city: "Boat Quay Town",
+        file: "Music TOZ/[MapleStory BGM] Singapore_ Boat Quay Town.mp3",
+        image: "images/boatquaytown.jpg"
+    },
+    {
+        region: "World Tour",
+        city: "Kampung Village",
+        file: "Music TOZ/[MapleStory BGM] Malaysia_ Kuala Lumpur Kampung Village.mp3",
+        image: "images/kampungvillage.jpg"
+    },
+    {
+        region: "World Tour",
+        city: "Golden Temple",
+        file: "Music TOZ/[MapleStory BGM] Golden Temple Town.mp3",
+        image: "images/goldentemple.jpg"
+    },
+    {
+        region: "World Tour",
+        city: "Shanghai",
+        file: "Music TOZ/[MapleStory BGM] China_ Go Shanghai (Original Version).mp3",
+        image: "images/shanghai.jpg"
+    },
+    {
+        region: "World Tour",
+        city: "Mushroom Shrine",
+        file: "Music TOZ/[MapleStory BGM] Mushroom Shrine_ Feeling.mp3",
+        image: "images/mushroomshrine.jpg"
+    },
+    {
+        region: "World Tour",
+        city: "Showa",
+        file: "Music TOZ/[MapleStory BGM] Showa_ Yume.mp3",
+        image: "images/showa.jpg"
+    },
+    {
+        region: "Orbis Boat",
+        city: "Orbis",
+        file: "Music TOZ/[MapleStory BGM] Orbis_ Shinin' Harbor.mp3",
+        image: "images/orbis.jpg"
+    },
+    {
+        region: "Orbis Boat",
+        city: "Leafre",
+        file: "Music TOZ/[MapleStory BGM] Leafre.mp3",
+        image: "images/leafre.jpg"
+    },
+    {
+        region: "Orbis Boat",
+        city: "Ludibrium",
+        file: "Music TOZ/[MapleStory BGM] Ludibrium_ Fantastic Thinking.mp3",
+        image: "images/ludibrium.jpg"
+    },
+    {
+        region: "Orbis Boat",
+        city: "Omega Sector",
+        file: "Music TOZ/[MapleStory BGM] Omega Sector_ Let's March.mp3",
+        image: "images/omegasector.jpg"
+    },
+    {
+        region: "Orbis Boat",
+        city: "Ereve",
+        file: "Music TOZ/[MapleStory BGM] Ereve_ Queen's Garden.mp3",
+        image: "images/ereve.jpg"
+    },
+    {
+        region: "Orbis Boat",
+        city: "Ariant",
+        file: "Music TOZ/[MapleStory BGM] Ariant.mp3",
+        image: "images/ariant.jpg"
+    },
+    {
+        region: "Orbis Boat",
+        city: "Magatia",
+        file: "Music TOZ/[MapleStory BGM] Magatia_ Dispute.mp3",
+        image: "images/magatia.jpg"
+    },
+    {
+        region: "Orbis Boat",
+        city: "Mu Lung",
+        file: "Music TOZ/[MapleStory BGM] Mu Lung Hill.mp3",
+        image: "images/mulung.jpg"
+    },
+    {
+        region: "Orbis Boat",
+        city: "Herb Town",
+        file: "Music TOZ/[MapleStory BGM] Herb Town_ White Herb.mp3",
+        image: "images/herbtown.jpg"
+    },
+    {
+        region: "Orbis Boat",
+        city: "Korean Folk Town",
+        file: "Music TOZ/[MapleStory BGM] Korean Folk Town_ Downtown.mp3",
+        image: "images/koreanfolktown.jpg"
+    },
+    {
+        region: "Orbis Boat",
+        city: "Aquarium",
+        file: "Music TOZ/[MapleStory BGM] Aquarium.mp3",
+        image: "images/aquarium.jpg"
+    },
+    {
+        region: "Orbis Boat",
+        city: "El Nath",
+        file: "Music TOZ/[MapleStory BGM] El Nath_ Snowy Village.mp3",
+        image: "images/elnath.jpg"
+    },
+    {
+        region: "Orbis Boat",
+        city: "Temple Of Time",
+        file: "Music TOZ/[MapleStory BGM] Temple of Time.mp3",
+        image: "images/templeoftime.jpg"
+    },
+    {
+        region: "Orbis Boat",
+        city: "Ellin Forest",
+        file: "Music TOZ/[MapleStory BGM] Ellin Forest.mp3",
+        image: "images/ellinforest.jpg"
+    }
 ];
 
-// Array of background images
-const backgrounds = ["bg1.png", "bg2.png", "bg3.png", "bg4.png"];
+window.songs = songs;
 
-const cityName = document.getElementById("cityName");
-const cityImage = document.getElementById("cityImage");
-const audioPlayer = document.getElementById("audioPlayer");
-const imagePalette = document.getElementById("imagePalette");
-const playPauseBtn = document.getElementById("playPauseBtn");
-const volumeSlider = document.getElementById("volumeSlider");
-const backgroundContainer = document.getElementById("backgroundContainer");
-
-// Preload all audio files
-function preloadAudio() {
-    songs.forEach(song => {
-        const audio = new Audio(song.file);
-        audio.preload = "auto"; // Preload the audio file
-    });
-}
-
-// Function to get a random background
-function getRandomBackground() {
-    const randomIndex = Math.floor(Math.random() * backgrounds.length);
-    return `images/${backgrounds[randomIndex]}`;
-}
-
-// Function to set a specific background
-function setBackground(image) {
-    const bgPath = `url('${image}')`;
-    console.log("Setting background:", bgPath); // Debugging
-    backgroundContainer.style.backgroundImage = bgPath;
-}
-
-function loadPalette() {
-    const groupedSongs = {};
-
-    songs.forEach(song => {
-        if (!groupedSongs[song.region]) {
-            groupedSongs[song.region] = [];
+function getGroupedByRegion() {
+    return songs.reduce((grouped, song) => {
+        if (!grouped[song.region]) {
+            grouped[song.region] = [];
         }
-        groupedSongs[song.region].push(song);
-    });
-
-    for (const region in groupedSongs) {
-        const regionHeader = document.createElement("h2");
-        regionHeader.textContent = region;
-        imagePalette.appendChild(regionHeader);
-
-        const regionContainer = document.createElement("div");
-        regionContainer.classList.add("region-container");
-
-        groupedSongs[region].forEach(song => {
-            const img = document.createElement("img");
-            img.src = song.image;
-            img.alt = song.city;
-            img.addEventListener("click", () => playSong(song));
-            regionContainer.appendChild(img);
-        });
-
-        imagePalette.appendChild(regionContainer);
-    }
+        grouped[song.region].push(song);
+        return grouped;
+    }, {});
 }
-
-function populateRegionFilter() {
-    const uniqueRegions = [...new Set(songs.map(song => song.region))];
-    const regionSelect = document.getElementById("regionSelect");
-    uniqueRegions.forEach(region => {
-        const option = document.createElement("option");
-        option.value = region;
-        option.textContent = region;
-        regionSelect.appendChild(option);
-    });
-
-    regionSelect.addEventListener("change", () => {
-        const selectedRegion = regionSelect.value;
-        imagePalette.innerHTML = "";
-        if (selectedRegion === "all") {
-            loadPalette();
-        } else {
-            loadPaletteFiltered(selectedRegion);
-        }
-    });
-}
-
-function loadPaletteFiltered(region) {
-    const filteredSongs = songs.filter(song => song.region === region);
-    filteredSongs.forEach(song => {
-        const img = document.createElement("img");
-        img.src = song.image;
-        img.alt = song.city;
-        img.addEventListener("click", () => playSong(song));
-        imagePalette.appendChild(img);
-    });
-}
-
-
-function playSong(song) {
-    cityName.textContent = song.city;
-    cityImage.src = song.image;
-    cityImage.style.display = "block";
-    audioPlayer.src = song.file;
-    audioPlayer.style.display = "block";
-    audioPlayer.play();
-    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-    setBackground(song.image); // Update background to town-specific image
-}
-
-// Play/Pause Button
-playPauseBtn.addEventListener("click", () => {
-    if (audioPlayer.paused) {
-        audioPlayer.play();
-        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-    } else {
-        audioPlayer.pause();
-        playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-    }
-});
-
-// Volume Slider
-volumeSlider.addEventListener("input", () => {
-    audioPlayer.volume = volumeSlider.value;
-});
-
-// Update button icon when song ends
-audioPlayer.addEventListener("ended", () => {
-    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-});
-
-// Set initial background to a random image
-setBackground(getRandomBackground());
-
-// Preload audio files when the page loads
-preloadAudio();
-loadPalette();
